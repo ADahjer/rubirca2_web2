@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./index.css";
+
+// importacion de las paginas y componentes
+import CreateManilla from "./pages/CreateManilla";
 import NavigationBar from "./components/NavigationBar";
+
+const pedidos = [];
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <CreateManilla pedidos={pedidos} />,
   }
 ]);
 

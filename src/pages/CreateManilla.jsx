@@ -17,7 +17,7 @@ import oroRosa from "../assets/oro-rosa.jpg";
 import plata from "../assets/plata.jpg";
 import niquel from "../assets/niquel.jpg";
 
-const CreateManilla = () => {
+const CreateManilla = ({pedidos}) => {
   const tipos = { cuero, cuerda };
   const dijes = { matillo, ancla };
   const materiales = { oro, oroRosa, plata, niquel };
@@ -44,7 +44,18 @@ const CreateManilla = () => {
     setMaterialValue(1);
   }
 
-  const onContinue = () => {}
+  // funcion para continuar con la compra
+  const onContinue = () => {
+    const pedido = {
+      tipo: tipoValue == 1 ? "Cuero" : "Cuerda",
+      dije: dijeValue == 1 ? "Martillo" : "Ancla",
+      material: materialValue == 1 ? "Oro" : materialValue == 2 ? "Oro Rosa" : materialValue == 3 ? "Plata" : "Niquel",
+      cantidad: cantidad
+    };
+    pedidos.push(pedido);
+    console.log(pedidos);
+    onClear();
+  }
 
   return (
     <>
@@ -95,7 +106,7 @@ const CreateManilla = () => {
 
         <div className="manilla-buttons">
           <Button variant="danger" onClick={onClear}>Limpiar seleccion</Button>{' '}
-          <Button variant="success">Continuar</Button>{' '}
+          <Button variant="success" onClick={onContinue} >Continuar</Button>{' '}
         </div>
       </Container>
     </>
