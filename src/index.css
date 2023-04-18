@@ -34,3 +34,15 @@ body {
   width: 40%;
   margin: 0 auto;
 }
+
+.manilla-cantidad {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.manilla-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  grid-auto-columns: minmax(auto, 2rem);
+}
