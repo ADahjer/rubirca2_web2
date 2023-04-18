@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import NavigationBar from "../components/NavigationBar";
 import Container from "react-bootstrap/Container";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -46,21 +47,89 @@ const CreateManilla = ({pedidos}) => {
 
   // funcion para continuar con la compra
   const onContinue = () => {
-    const pedido = {
+    let pedido = {
       tipo: tipoValue == 1 ? "Cuero" : "Cuerda",
       dije: dijeValue == 1 ? "Martillo" : "Ancla",
       material: materialValue == 1 ? "Oro" : materialValue == 2 ? "Oro Rosa" : materialValue == 3 ? "Plata" : "Niquel",
       cantidad: cantidad
     };
+    pedido = {...pedido, total: calculate(pedido)};
     pedidos.push(pedido);
-    console.log(pedidos);
     onClear();
   }
 
+  // funcion para calcular el valor de la compra
+  const calculate = (pedido) => {
+    let total = 0;
+      // Si es cuero y dije de martillo
+      if (pedido.tipo === 'Cuero' && pedido.dije === 'Martillo') {
+        switch (pedido.material) {
+          case 'Oro':
+          case 'Oro Rosa':
+            total = 100 * pedido.cantidad; 
+            break;
+          
+          case 'Plata':
+            total = 80 * pedido.cantidad;
+            break;
+
+          case 'Niquel':
+            total = 70 * pedido.cantidad;
+        }
+        // si es cuero y dije de ancla
+      } else if (pedido.tipo === 'Cuero' && pedido.dije === 'Ancla') {
+        switch (pedido.material) {
+          case 'Oro':
+          case 'Oro Rosa':
+            total = 120 * pedido.cantidad; 
+            break;
+          
+          case 'Plata':
+            total = 100 * pedido.cantidad;
+            break;
+
+          case 'Niquel':
+            total = 90 * pedido.cantidad;
+        }
+        // si es cuerda y dije de martillo
+      } else if (pedido.tipo === 'Cuerda' && pedido.dije === 'Martillo') {
+        switch (pedido.material) {
+          case 'Oro':
+          case 'Oro Rosa':
+            total = 90 * pedido.cantidad;
+            break;
+
+          case 'Plata':
+            total = 70 * pedido.cantidad;
+            break;
+          
+          case 'Niquel':
+            total = 50 * pedido.cantidad;
+        }
+        // si es cuerda y dije de ancla
+      } else if (pedido.tipo === 'Cuerda' && pedido.dije === 'Ancla') {
+        switch (pedido.material) {
+          case 'Oro':
+          case 'Oro Rosa':
+            total = 110 * pedido.cantidad;
+            break;
+
+          case 'Plata':
+            total = 90 * pedido.cantidad;
+            break;
+
+          case 'Niquel':
+            total = 80 * pedido.cantidad;
+        }
+      };
+      return total;
+  };
+
   return (
     <>
+      <NavigationBar />
       <h1 className="manilla-title mt-2">Crea tu manilla</h1>
-      <Container className="mt-4 manilla-container">
+      <Container className="mt-4 custom-container">
 
         <InputGroup className="manilla-cantidad my-3">
           <InputGroup.Text>Cantidad</InputGroup.Text>
