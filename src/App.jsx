@@ -1,11 +1,12 @@
 import React from 'react';
-import NavigationBar from './components/NavigationBar';
+import CreateManilla from './components/CreateManilla';
+
 
 function App() {
 
   return (
     <>
-      <NavigationBar />
+     <CreateManilla />
     </>
   )
 }
