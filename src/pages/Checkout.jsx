@@ -44,9 +44,9 @@ const Checkout = ({pedidos}) => {
     let valor_total = moneda === 1 ? usd : cop;
     const divisa = moneda === 1 ? 'USD' : 'COP';
     const data = setData(pedidos, valor_total, divisa);
+    toast.success('Compra realizada con exito');
     await saveData(data);
     //toast
-    toast.success('Compra realizada con exito');
     navigate('/');
   }
 
