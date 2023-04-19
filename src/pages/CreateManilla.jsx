@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState} from "react";
 import NavigationBar from "../components/NavigationBar";
 import Container from "react-bootstrap/Container";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
@@ -56,6 +55,8 @@ const CreateManilla = ({pedidos}) => {
     pedido = {...pedido, total: calculate(pedido)};
     pedidos.push(pedido);
     onClear();
+    // scroll to top
+    window.scrollTo(0, 0);
   }
 
   // funcion para calcular el valor de la compra

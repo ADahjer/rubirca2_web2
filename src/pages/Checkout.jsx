@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import NavigationBar from '../components/NavigationBar';
 import { useNavigate } from 'react-router-dom';
+import { setData } from '../utils/setData';
+import { saveData } from '../utils/saveData'
 import Container from 'react-bootstrap/Container';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
@@ -21,7 +23,8 @@ const Checkout = ({pedidos}) => {
     });
     setUsd(total);
     setCop(total * 5000);
-  }, []);
+
+  }, [moneda]);
 
   // funcion para manejar la cancelacion de la compra
   const onCanel = () => {
@@ -30,7 +33,12 @@ const Checkout = ({pedidos}) => {
   }
 
   // funcion para manejar el pago de la compra
-  const onPay = () => {}
+  const onPay = async () => {
+    let valor_total = moneda === 1 ? usd : cop;
+    const divisa = moneda === 1 ? 'USD' : 'COP';
+    const data = setData(pedidos, valor_total, divisa);
+    await saveData(data);
+  }
 
   return (
     <>
