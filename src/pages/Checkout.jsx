@@ -1,12 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import NavigationBar from '../components/NavigationBar';
 import { useNavigate } from 'react-router-dom';
+
+// importacion propias
+import NavigationBar from '../components/NavigationBar';
 import { setData } from '../utils/setData';
 import { saveData } from '../utils/saveData'
+
+// importacion de componentes de bootstrap
 import Container from 'react-bootstrap/Container';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
+
+// importacion de varias
+import {Toaster, toast} from "react-hot-toast";
 
 const Checkout = ({pedidos}) => {
 
@@ -38,6 +45,9 @@ const Checkout = ({pedidos}) => {
     const divisa = moneda === 1 ? 'USD' : 'COP';
     const data = setData(pedidos, valor_total, divisa);
     await saveData(data);
+    //toast
+    toast.success('Compra realizada con exito');
+    navigate('/');
   }
 
   return (
@@ -74,6 +84,8 @@ const Checkout = ({pedidos}) => {
           <h3 className="valor mt-4">Total: ${moneda === 1 ? usd : cop}</h3>
         </div>
       </Container>
+
+      <Toaster position='top-right' reverseOrder={false} />
     </>
   );
 };

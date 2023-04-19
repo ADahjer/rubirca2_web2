@@ -1,11 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+
+// importaciones de componentes mios
 import NavigationBar from "../components/NavigationBar";
+
+// importaciones de componentes de bootstrap
 import Container from "react-bootstrap/Container";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
+
+//importaciones varias
+import {Toaster, toast} from "react-hot-toast";
 
 // importacion de las imagenes en la carpeta assets
 import cuero from "../assets/cuero.jpg";
@@ -32,6 +39,11 @@ const CreateManilla = ({pedidos}) => {
   const [tipoValue, setTipoValue] = useState(1);
   const [dijeValue, setDijeValue] = useState(1);
   const [materialValue, setMaterialValue] = useState(1);
+
+  // useEffect para limpiar la seleccion al iniciar la pagina
+  useEffect(() => {
+    onClear();
+  }, []);
   
   // funcion para limpiar la seleccion del usuario y volver a la seleccion por defecto
   const onClear = () => {
@@ -42,6 +54,8 @@ const CreateManilla = ({pedidos}) => {
     setTipoValue(1);
     setDijeValue(1);
     setMaterialValue(1);
+    // scroll to top
+    window.scrollTo(0, 0);
   }
 
   // funcion para continuar con la compra
@@ -57,6 +71,8 @@ const CreateManilla = ({pedidos}) => {
     onClear();
     // scroll to top
     window.scrollTo(0, 0);
+    // toast
+    toast.success("Manilla agregada al carrito");
   }
 
   // funcion para calcular el valor de la compra
@@ -179,6 +195,8 @@ const CreateManilla = ({pedidos}) => {
           <Button variant="success" onClick={onContinue} >Continuar</Button>{' '}
         </div>
       </Container>
+
+      <Toaster position="top-right" reverseOrder={false}/>
     </>
   );
 };
